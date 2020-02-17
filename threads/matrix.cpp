@@ -2,6 +2,8 @@
 #include <vector>
 #include <pthread.h>
 #include <unistd.h>
+#include "matrixcreate.h"
+#include <chrono>
 using namespace std;
 
 
@@ -43,18 +45,17 @@ void matrixprint (vector<vector<int>>  &v){
 
 void *add_elemets(void *i){
     long mi = long(i);
-    cout<<endl<<"thread number "<< mi <<endl;
+    //cout<<endl<<"thread number "<< mi <<endl;
      for (long im1 = 0;im1 < matrix1.size();im1++){
          int sum = 0;
             for(long pos = 0; pos < matrix1[im1].size();pos++){
                 sum  = sum + matrix1[im1][pos] * matrix2[pos][mi];
-                cout <<"sum : "<< sum <<endl;
+        
                 
             }
             result[im1][mi] = sum;
-            cout<< "result here : " << endl;
-            matrixprint(result);
             
+            matrixprint(result);
             
         }
         
@@ -65,19 +66,7 @@ void *add_elemets(void *i){
 void  add (){
 
     
-    pthread_t threads[matrix2.size()];
-    int rc;
-    for(long i = 0 ; i < matrix2.size(); i++){
-       rc = pthread_create(&threads[i],NULL,add_elemets, (void *)i );
-       
-       cout <<endl;
-        if(rc){
-            cout<<"error form thread_create";
-            exit(-1);
-        }
-         cout<<"response in thread"<<endl;
-        matrixprint(result);
-    }
+  return;
   
    
    
@@ -94,22 +83,60 @@ void *test (){
     }
 }
 
-int main (){
-    cout << "matrix 1"<<endl;
-    matrixprint(matrix1);
-    cout << "matrix 2"<<endl;
-    matrixprint(matrix2);
-    
-    result.resize(matrix1.size(),vector<int>(matrix1.size()));
-    add();
+int main (int argc, char *argv[]){
+    //vector<vector<vector<int>>> arrays = create_matrix(10,matrix1,matrix2);
+   // matrix1 = arrays[0];
+    //matrix2 = arrays[1];
+
+    int num = 2;
+    //try{
+        //num = stoi(argv[1]);
+    //} catch(const exception& e){
+        //cerr <<" error : " << e.what()<<endl;
+    //}
+
+    //matrix1.resize(num,vector<int>(num,0));
+    //matrix2.resize(num,vector<int>(num,0));
+    cout << "matriz1 : " <<endl;
+    //matrix1 = matrix_create(num);
    
-    
-        cout<<endl;
-        //matrixprint(result);
-        cout<<endl;
-    
+    //cout << "matriz2 : " <<endl;
+    //matrix2 = matrix_create(num);
+
+   // result.resize(matrix1.size(),vector<int>(matrix1.size()));
+   // std::chrono::time_point<std::chrono::system_clock> start, end;
+    //start = std::chrono::system_clock::now();
+    //end = std::chrono::system_clock::now();
+    //double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    //cout <<endl<<"time here : " <<time<<endl;
+    cout<<"result"<<endl;
+    pthread_t threads[num];
+    int rc;
+    for(long i = 0 ; i < num; i++){
+       rc = pthread_create(&threads[i],NULL,add_elemets, &i );
+       
+       cout <<endl;
+        if(rc){
+            cout<<"error form thread_create";
+            exit(-1);
+        }
         
-      pthread_exit(NULL);
-    return 1;
+        
+    }
+    matrixprint(result);
+
+    for (int i = 0; i < num; i++){
+        pthread_join(threads[i],NULL);
+    }
+    matrixprint(result);
+    matrix1.clear();
+    matrix2.clear();
+    result.clear();
+    free(threads);
+    
+    
+    
+    
+    
 }
 
