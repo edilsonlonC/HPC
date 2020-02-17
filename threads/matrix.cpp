@@ -2,6 +2,8 @@
 #include <vector>
 #include <pthread.h>
 #include <unistd.h>
+#include "matrix_generator.h"
+#include <chrono>
 using namespace std;
 
 
@@ -43,17 +45,17 @@ void matrixprint (vector<vector<int>>  &v){
 
 void *add_elemets(void *i){
     long mi = long(i);
-    cout<<endl<<"thread number "<< mi <<endl;
+    //cout<<endl<<"thread number "<< mi <<endl;
      for (long im1 = 0;im1 < matrix1.size();im1++){
          int sum = 0;
             for(long pos = 0; pos < matrix1[im1].size();pos++){
                 sum  = sum + matrix1[im1][pos] * matrix2[pos][mi];
-                cout <<"sum : "<< sum <<endl;
+               
                 
             }
             result[im1][mi] = sum;
-            cout<< "result here : " << endl;
-            matrixprint(result);
+          
+           
             
             
         }
@@ -67,6 +69,10 @@ void  add (){
     
     pthread_t threads[matrix2.size()];
     int rc;
+      // cpu time
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
+    
     for(long i = 0 ; i < matrix2.size(); i++){
        rc = pthread_create(&threads[i],NULL,add_elemets, (void *)i );
        
@@ -75,16 +81,20 @@ void  add (){
             cout<<"error form thread_create";
             exit(-1);
         }
-         cout<<"response in thread"<<endl;
-        matrixprint(result);
+         
+        
     }
     for (int i = 0 ; i < matrix2.size();i++){
         pthread_join(threads[i],NULL);
     }
+    end = std::chrono::system_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    cout <<endl<<"time here : " <<time<<endl;
     matrix1.clear();
     matrix2.clear();
     result.clear();
     //free(threads);
+   // matrixprint(result);
     pthread_exit(NULL);
   
    
@@ -102,19 +112,31 @@ void *test (){
     }
 }
 
-int main (){
+int main (int argcv, char * argv[]){
+    int n = 0;
+    try{
+        n = stoi(argv[1]);
+    }catch(const exception e){
+        cout<<"no sirvo =("<<endl;
+        return -1;
+    }
+
+
     cout << "matrix 1"<<endl;
-    matrixprint(matrix1);
+    matrix1 = matrix_generator(n);
+    matrix2 = matrix_generator(n);
+    //matrixprint(matrix1);
     cout << "matrix 2"<<endl;
-    matrixprint(matrix2);
+    //matrixprint(matrix2);
+    
     
     result.resize(matrix1.size(),vector<int>(matrix1.size()));
+
+  
     add();
-   
     
-        cout<<endl;
-        //matrixprint(result);
-        cout<<endl;
+    
+   
         
     return 1;
 }
