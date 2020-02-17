@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include "matrix_generator.h"
+#include "csv_generator.h"
 #include <chrono>
 using namespace std;
 
@@ -90,6 +91,7 @@ void  add (){
     end = std::chrono::system_clock::now();
     double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     cout <<endl<<"time here : " <<time<<endl;
+    csv_generator(result);
     matrix1.clear();
     matrix2.clear();
     result.clear();
