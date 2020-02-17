@@ -2,25 +2,17 @@
 #include <vector>
 #include <pthread.h>
 #include <unistd.h>
+#include <chrono>
 using namespace std;
 
 
 
 
 
-vector<vector<int>> matrix1 = {
-    {2,0,1,3},
-    {3,0,0,4},
-    {5,1,1,5},
-    {6,4,3,6}
-};
+vector<vector<int>> matrix1;
+    
 
-vector<vector<int>> matrix2 = {
-    {1,0,1,1},
-    {1,2,1,2},
-    {1,1,0,3},
-    {2,3,4,4}
-};
+vector<vector<int>> matrix2;
 
 vector<vector<int>> result;
 
@@ -78,6 +70,7 @@ void  add (){
          cout<<"response in thread"<<endl;
         matrixprint(result);
     }
+     pthread_exit(NULL);
   
    
    
@@ -99,17 +92,15 @@ int main (){
     matrixprint(matrix1);
     cout << "matrix 2"<<endl;
     matrixprint(matrix2);
-    
+    // timing cpu 
+
+   
     result.resize(matrix1.size(),vector<int>(matrix1.size()));
+    
     add();
    
-    
-        cout<<endl;
-        //matrixprint(result);
-        cout<<endl;
-    
         
-      pthread_exit(NULL);
+     
     return 1;
 }
 
