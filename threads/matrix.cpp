@@ -78,6 +78,14 @@ void  add (){
          cout<<"response in thread"<<endl;
         matrixprint(result);
     }
+    for (int i = 0 ; i < matrix2.size();i++){
+        pthread_join(threads[i],NULL);
+    }
+    matrix1.clear();
+    matrix2.clear();
+    result.clear();
+    //free(threads);
+    pthread_exit(NULL);
   
    
    
@@ -107,9 +115,7 @@ int main (){
         cout<<endl;
         //matrixprint(result);
         cout<<endl;
-    
         
-      pthread_exit(NULL);
     return 1;
 }
 
