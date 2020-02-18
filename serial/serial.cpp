@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include "../threads/matrix_generator.h"
+#include "chrono"
+#include "csv_generator.h"
 using namespace std;
 
 
@@ -19,7 +22,7 @@ vector<vector<int>> matrix2 = {
     {2,3,4,4}
 };
 
-
+vector<vector<int>> result;
 
 
 int multiplier(int a , int b){
@@ -41,26 +44,30 @@ int addElemets(int i){
     
 }
 
-vector<vector<int>>  add (){
+void add (){
     int sum = 0;
-    vector<vector<int>> result;
+      // cpu time
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
     result.resize(matrix1.size(),vector<int>(matrix1.size()));
     for(int i = 0 ; i < matrix2.size(); i++){
         for (int im1 = 0;im1 < matrix1.size();im1++){
             for(int pos = 0; pos < matrix1[im1].size();pos++){
-                printf("%d %d \n", matrix1[im1][pos],matrix2[pos][i]);
                 sum  = sum + matrix1[im1][pos] * matrix2[pos][i];
                 
             }
-            printf("esta es la suma %d \n" , sum);
             result[im1][i] = sum;
             sum=0;
             
         }
        
     }
+    end = std::chrono::system_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    cout <<endl<<"time here : " <<time<<endl;
+    csv_generator(result);
     
-    return  result;
+    
 }
 
 void *test (){
@@ -71,10 +78,22 @@ void *test (){
     }
 }
 
-int main (){
+int main (int argc, char *argv[]){
+
+    int n = 0;
+    try{
+        n = stoi(argv[1]);
+    }catch(const exception e){
+        cout<<"me dañe =("<<endl;
+        return -1;
+    }
+    matrix1 = matrix_generator(n);
+    matrix2 = matrix_generator(n);
+    result.resize(n,vector<int>(n));
+    add();
+ 
    
-    vector<vector<int>> result = add();
-    matrixprint(result);
+    
     return 1;
 }
 
