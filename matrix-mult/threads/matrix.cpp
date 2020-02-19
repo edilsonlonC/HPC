@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <pthread.h>
+//#include <pthread.h>
 #include <unistd.h>
+#include <thread>
 #include "matrix_generator.h"
 #include "csv_generator.h"
 #include <chrono>
@@ -44,7 +45,7 @@ void matrixprint (vector<vector<int>>  &v){
     }
 }
 
-void *add_elemets(void *i){
+void add_elemets(void *i){
     long mi = long(i);
     //cout<<endl<<"thread number "<< mi <<endl;
      for (long im1 = 0;im1 < matrix1.size();im1++){
@@ -68,14 +69,16 @@ void *add_elemets(void *i){
 double  add (){
 
     
-    pthread_t threads[matrix2.size()];
+  //  pthread_t threads[matrix2.size()];
+    vector<thread> threads;
     int rc;
       // cpu time
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
     
     for(long i = 0 ; i < matrix2.size(); i++){
-       rc = pthread_create(&threads[i],NULL,add_elemets, (void *)i );
+       //rc = pthread_create(&threads[i],NULL,add_elemets, (void *)i );
+        threads.push_back(thread(add_elemets,i));
        
        cout <<endl;
         if(rc){
@@ -86,7 +89,8 @@ double  add (){
         
     }
     for (int i = 0 ; i < matrix2.size();i++){
-        pthread_join(threads[i],NULL);
+        //pthread_join(threads[i],NULL);
+        threads[i].join();
     }
     end = std::chrono::system_clock::now();
     double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
