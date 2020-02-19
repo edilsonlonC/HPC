@@ -65,7 +65,7 @@ void *add_elemets(void *i){
         
 }
 
-void  add (){
+double  add (){
 
     
     pthread_t threads[matrix2.size()];
@@ -92,12 +92,15 @@ void  add (){
     double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     cout <<endl<<"time here : " <<time<<endl;
     csv_generator(result);
+    csv_time(time,matrix2.size());
     matrix1.clear();
     matrix2.clear();
     result.clear();
     //free(threads);
    // matrixprint(result);
     pthread_exit(NULL);
+  
+    return time;
   
    
    
@@ -135,7 +138,9 @@ int main (int argcv, char * argv[]){
     result.resize(matrix1.size(),vector<int>(matrix1.size()));
 
   
-    add();
+    double time =  add();
+
+    
     
     
    

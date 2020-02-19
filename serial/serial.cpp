@@ -44,7 +44,7 @@ int addElemets(int i){
     
 }
 
-void add (){
+double add (){
     int sum = 0;
       // cpu time
     std::chrono::time_point<std::chrono::system_clock> start, end;
@@ -66,7 +66,7 @@ void add (){
     double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     cout <<endl<<"time here : " <<time<<endl;
     csv_generator(result);
-    
+    return time;
     
 }
 
@@ -90,8 +90,8 @@ int main (int argc, char *argv[]){
     matrix1 = matrix_generator(n);
     matrix2 = matrix_generator(n);
     result.resize(n,vector<int>(n));
-    add();
- 
+    double time = add();
+    csv_time(time,n);
    
     
     return 1;

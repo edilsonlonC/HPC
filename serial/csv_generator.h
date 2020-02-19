@@ -26,16 +26,39 @@ int csv_generator(vector<vector<int>>  & matrix){
 int csv_time(double time , int threads){
 
     try{
+    string headers = "threads,time";
+    string cell;
+    string line;
+    std::fstream openfile("time.csv");
+    if (openfile.is_open()){
+        while(getline(openfile,line)){
+            if (line != headers)
+            {
+            cout<<line;
+            cell.append(line);
+            cell.append("\n");
+            }
+        }
+        openfile.close();
+    }
     std::ofstream  file;
     file.open("time.csv");
-    string cell;
+    file << "threads,time\n";
+    
+    
     cell.append(to_string(threads));
     cell.append(",");
-    cell.append(to_string (threads));
+    cell.append(to_string (time));
+    cell.append("\n");
+    file << cell;
+    file.close();
+ 
+    
     }catch(const  exception e){
         cout<<"erro al generar el csv";
         return -1;
     }
+
     return 1;
 
 }
