@@ -127,11 +127,10 @@ int main (int argcv, char * argv[]){
     }
 
 
-    cout << "matrix 1"<<endl;
+   
     matrix1 = matrix_generator(n);
     matrix2 = matrix_generator(n);
     //matrixprint(matrix1);
-    cout << "matrix 2"<<endl;
     //matrixprint(matrix2);
     
     
