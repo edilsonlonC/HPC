@@ -45,7 +45,7 @@ void matrixprint (vector<vector<int>>  &v){
     }
 }
 
-void add_elemets(void *i){
+void add_elemets(long i){
     long mi = long(i);
     //cout<<endl<<"thread number "<< mi <<endl;
      for (long im1 = 0;im1 < matrix1.size();im1++){
@@ -62,7 +62,7 @@ void add_elemets(void *i){
             
         }
         
-        pthread_exit(NULL);
+        //pthread_exit(NULL);
         
 }
 
@@ -81,10 +81,7 @@ double  add (){
         threads.push_back(thread(add_elemets,i));
        
        cout <<endl;
-        if(rc){
-            cout<<"error form thread_create";
-            exit(-1);
-        }
+       
          
         
     }
@@ -102,7 +99,7 @@ double  add (){
     result.clear();
     //free(threads);
    // matrixprint(result);
-    pthread_exit(NULL);
+   // pthread_exit(NULL);
   
     return time;
   
