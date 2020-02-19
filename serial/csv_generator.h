@@ -21,3 +21,21 @@ int csv_generator(vector<vector<int>>  & matrix){
     }
     file.close();
 }
+
+
+int csv_time(double time , int threads){
+
+    try{
+    std::ofstream  file;
+    file.open("time.csv");
+    string cell;
+    cell.append(to_string(threads));
+    cell.append(",");
+    cell.append(to_string (threads));
+    }catch(const  exception e){
+        cout<<"erro al generar el csv";
+        return -1;
+    }
+    return 1;
+
+}
