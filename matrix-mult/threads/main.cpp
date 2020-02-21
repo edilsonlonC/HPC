@@ -1,11 +1,6 @@
 #include <iostream>
 #include "matrix.h"
-
 using namespace std;
-
-
-
-
 
 int main (int argcv, char * argv[]){
     int n = 0;
@@ -18,11 +13,6 @@ int main (int argcv, char * argv[]){
 
     MatrixOperation matrix_operation(n);
     matrix_operation.add();
-    
-    
-    
-   
-        
     return 1;
 }
 
