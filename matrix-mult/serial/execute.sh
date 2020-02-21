@@ -1,6 +1,5 @@
 #!/bin/bash
 
-names='holaaaa'
 # Command for compile c++ threads and run 
 compile='compile' # compile file 
 run='run' # run file 
