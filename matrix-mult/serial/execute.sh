@@ -4,6 +4,7 @@
 compile='compile' # compile file 
 run='run' # run file 
 auto='auto'
+clean='clean'
 #if you use both can compile and run
 args=("$@")
 
@@ -18,7 +19,14 @@ auto_exec(){
 }
 
 echo " ${args[0]} ${args[1]} ${args[2]} ${args[3]}"
-if [ "${args[0]}" == "$compile" ] &&  [ "${args[1]}" == "$run" ] && [ "${args[2]}" == "$auto" ];
+
+if [ "${args[0]}" == "$compile" ] &&  [ "${args[1]}" == "$run" ] && [ "${args[2]}" == "$auto" ] && [ "${args[3]}" == "$clean" ];
+then
+	rm time.csv
+	g++ -std=c++11 -o ${args[4]} ${args[4]}.cpp -lpthread
+	auto_exec ${args[4]}
+
+elif [ "${args[0]}" == "$compile" ] &&  [ "${args[1]}" == "$run" ] && [ "${args[2]}" == "$auto" ];
 then
 	
 	g++ -std=c++11 -o ${args[3]} ${args[3]}.cpp -lpthread
