@@ -14,5 +14,5 @@
 ###### for execute automatic loop in execute.sh 
 `bash execute.sh compile run auto main`
 
-###### if you need xecute automatic loop and remove the file time.csv 
+###### if you need execute automatic loop and remove the file time.csv 
 `bash execute.sh compile run auto clean main`
