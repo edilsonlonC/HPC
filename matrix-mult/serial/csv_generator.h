@@ -34,7 +34,6 @@ int csv_time(double time , int threads){
         while(getline(openfile,line)){
             if (line != headers)
             {
-            cout<<line;
             cell.append(line);
             cell.append("\n");
             }
