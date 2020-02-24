@@ -38,10 +38,12 @@ Los tiempos reales de cpu se están calculando durante el proceso donde se efect
 * 1 TB SATA ST
 
 
-*Realizada por:* \
-*[Edilson Londoño Castañeda](https://github.com/edilsonlonC)* \
-*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
-
 ## Estadísticas
 
-![Results](https://github.com/edilsonlonC/HPC/) 
+![Results](https://raw.githubusercontent.com/edilsonlonC/HPC/master/matrix-mult/assets/results_algorithm.png) 
+
+## Contribuciones
+
+*Realizada por:* \
+* * [Edilson Londoño Castañeda](https://github.com/edilsonlonC)* \
+* * [Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
