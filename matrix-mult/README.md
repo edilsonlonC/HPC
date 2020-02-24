@@ -46,7 +46,7 @@ Los tiempos reales de cpu se están calculando durante el proceso donde se efect
 
 ## Estadísticas :bar_chart:
 <p align="center">
-![Results](https://raw.githubusercontent.com/edilsonlonC/HPC/master/matrix-mult/assets/results_algorithm.png) 
+  <img width="460" height="300" src="https://raw.githubusercontent.com/edilsonlonC/HPC/master/matrix-mult/assets/results_algorithm.png">
 </p>
 
 ## Conclusiones :blue_book:
