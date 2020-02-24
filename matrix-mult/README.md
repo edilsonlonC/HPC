@@ -6,10 +6,10 @@
 git clone https://github.com/edilsonlonC/HPC
 ```
 
-## Definiciones
+## Definiciones :bulb:
 La multiplicación de matrices tiene como característica recorrer un arreglo de dos dimensiones, donde la complejidad es O(n³). El código está estructurado en dos implementaciones: Una de manera secuencial y la otra de manera concurrente usando hilos. 
 
-## Caracteristicas del Algoritmo
+## Caracteristicas del Algoritmo :mag:
 
 La implementación secuencial recibe como parámetros el número de columnas para generar dos matrices aleatorias cuadradas y luego recorrerlas para multiplicarlas y generar una nueva matriz resultante. A diferencia de la implementación concurrente, además de crear matrices cuadradas, crea un vector de hilos con este mismo número para realizar las tareas de forma concurrente de manera que los núcleos del computador lo permitan. 
 
@@ -38,11 +38,11 @@ Los tiempos reales de cpu se están calculando durante el proceso donde se efect
 * 1 TB SATA ST
 
 
-## Estadísticas
+## Estadísticas :bar_chart:
 
 ![Results](https://raw.githubusercontent.com/edilsonlonC/HPC/master/matrix-mult/assets/results_algorithm.png) 
 
-## Conclusiones
+## Conclusiones :blue_book:
 
 La multiplicación de matrices de manera secuencial, es una buena solución para matrices pequeñas, y resulta ser mas eficiente que la solución concurrente en estos casos, pero cuando la matriz empieza a crecer y supera las 1000 columnas; hay una notable diferencia de tiempos, donde la solución concurrente resulta ser mas eficiente.
 
@@ -53,6 +53,4 @@ Al momento de realizar la ejecución del algoritmo concurrente, la máquina dond
 
 *Realizada por:* \
 *[Edilson Londoño Castañeda](https://github.com/edilsonlonC)* \
-*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*\
-
-:trollface:
+*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
