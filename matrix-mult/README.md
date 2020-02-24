@@ -1,8 +1,6 @@
 # Multiplicación de Matrices Secuencial y Concurrente
 
-*Realizada por:* \
-*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)* \
-*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
+*Clonar Repositorio*
 
 ```bash
 git clone https://github.com/edilsonlonC/HPC
@@ -40,3 +38,10 @@ Los tiempos reales de cpu se están calculando durante el proceso donde se efect
 * 1 TB SATA ST
 
 
+*Realizada por:* \
+*[Edilson Londoño Castañeda](https://github.com/edilsonlonC)* \
+*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
+
+## Estadísticas
+
+![Results](https://github.com/edilsonlonC/HPC/) 
