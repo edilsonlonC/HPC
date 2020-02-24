@@ -1,4 +1,4 @@
-# Multiplicación de Matrices Secuencial y Concurrente
+# Multiplicación de Matrices Secuencial y Concurrente 
 
 *Clonar Repositorio*
 
@@ -15,7 +15,7 @@ La implementación secuencial recibe como parámetros el número de columnas par
 
 Los tiempos reales de cpu se están calculando durante el proceso donde se efectúan operaciones aritméticas recorriendo cada matriz.
 
-## Características del PC
+## Características del PC :computer:
 
 #### Procesador: 
 * Intel Core i7-4510U CPU @ 2.00GHz 
@@ -49,9 +49,10 @@ La multiplicación de matrices de manera secuencial, es una buena solución para
 Al momento de realizar la ejecución del algoritmo concurrente, la máquina donde se realizó la prueba, quedó inoperativa. Esto es debido a que se están utilizando todos los recursos de la máquina, es decir los 4 núcleos que contiene el procesador. Mientras que durante la ejecución del algoritmo secuencial, se podían realizar tareas en segundo plano.
 
 
-## Contribuciones
+## Contribuciones :busts_in_silhouette:
 
 *Realizada por:* \
 *[Edilson Londoño Castañeda](https://github.com/edilsonlonC)* \
-*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*
+*[Sebastian Velez Montoya](https://github.com/sebasttianvelez)*\
 
+:trollface:
