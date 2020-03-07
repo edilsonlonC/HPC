@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/mman.h>
 #include <time.h>
+#include <sys/wait.h>
 
 
 void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
@@ -15,8 +17,19 @@ void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
 }
 
 void solve (int ** m1 , int ** m2 , int  ** r, int number){
-    
-    for (long i = 0; i<number; i++) solve_matrix(m1,m2,r,number,i);
+    int status;
+    pid_t p_id;
+    for (long i = 0; i<number; i++) {
+
+        p_id = fork();
+        if (p_id == 0){
+            solve_matrix(m1,m2,r,number,i);
+            printf("the child %d and father %d \n \n",getpid(),getppid());
+
+            exit(1);
+        }else continue;
+        }
+    for (long i = 0; i < number;i++) wait(&status);
 }
 
 void create(int **m1 , int number)
@@ -42,10 +55,12 @@ void print_matrix(int ** m, int number){
 
 
 
-int main (){
+int main (int argc, char *argv[]){
 
 
-    int number = 3;
+    int number = (int)atoi(argv[1]);
+
+
     int  ** m1;
     int  ** m2; 
     int   **r;
