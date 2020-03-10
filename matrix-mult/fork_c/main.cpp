@@ -21,8 +21,7 @@ void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
 void solve (int ** m1 , int ** m2 , int  ** r, int number){
     int status;
 
-    std::chrono::time_point<std::chrono::system_clock> start, end;
-    start = std::chrono::system_clock::now();
+  
     pid_t p_id;
 
     for (long i = 0; i<number; i++) {
@@ -37,10 +36,7 @@ void solve (int ** m1 , int ** m2 , int  ** r, int number){
         }
     for (long i = 0; i < number;i++) wait(&status);
 
-        end = std::chrono::system_clock::now();
-        double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
-        //printf("\n time here %lf \n",time);
-        csv_time(time,number);
+       
 
 }
 
@@ -91,7 +87,13 @@ int main (int argc, char *argv[]){
     }
     create(m1,number);
     create(m2,number);
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
     solve(m1,m2,r,number);
+     end = std::chrono::system_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    //printf("\n time here %lf \n",time);
+    csv_time(time,number);
     //print_matrix(m1,number);
     //print_matrix(m2,number);
     //print_matrix(r,number);
