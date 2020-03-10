@@ -36,7 +36,8 @@ void create(int **m1 , int number)
 {
     for (int i = 0;i<number;i++){
         for (int j = 0 ; j<number;j++){
-             m1[i][j] = rand() & 9;
+             //srand(time(0));
+             m1[i][j] = rand() % 9;
         }
        
     }
