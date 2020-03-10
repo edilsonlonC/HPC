@@ -4,6 +4,7 @@
 #include <sys/mman.h>
 #include <time.h>
 #include <sys/wait.h>
+#include <chrono>
 
 
 void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
@@ -18,18 +19,27 @@ void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
 
 void solve (int ** m1 , int ** m2 , int  ** r, int number){
     int status;
+
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
     pid_t p_id;
+
     for (long i = 0; i<number; i++) {
 
         p_id = fork();
         if (p_id == 0){
             solve_matrix(m1,m2,r,number,i);
-            printf("the child %d and father %d \n \n",getpid(),getppid());
+            //printf("the child %d and father %d \n \n",getpid(),getppid());
 
             exit(1);
         }else continue;
         }
     for (long i = 0; i < number;i++) wait(&status);
+
+        end = std::chrono::system_clock::now();
+        double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+        printf("\n time here %lf \n",time);
+
 }
 
 void create(int **m1 , int number)
@@ -80,9 +90,9 @@ int main (int argc, char *argv[]){
     create(m1,number);
     create(m2,number);
     solve(m1,m2,r,number);
-    print_matrix(m1,number);
-    print_matrix(m2,number);
-    print_matrix(r,number);
+    //print_matrix(m1,number);
+    //print_matrix(m2,number);
+    //print_matrix(r,number);
 
     
     return 1;
