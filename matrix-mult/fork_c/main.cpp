@@ -5,6 +5,7 @@
 #include <time.h>
 #include <sys/wait.h>
 #include <chrono>
+#include "./csv_generator.h"
 
 
 void solve_matrix  (int ** m1 , int ** m2 ,int **r, int number,long i){
@@ -38,7 +39,8 @@ void solve (int ** m1 , int ** m2 , int  ** r, int number){
 
         end = std::chrono::system_clock::now();
         double time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
-        printf("\n time here %lf \n",time);
+        //printf("\n time here %lf \n",time);
+        csv_time(time,number);
 
 }
 
