@@ -16,7 +16,7 @@ La multiplicación de matrices tiene como característica recorrer un arreglo de
 <p align="justify">
 La implementación secuencial recibe como parámetros el número de columnas para generar dos matrices aleatorias cuadradas y luego recorrerlas para multiplicarlas y generar una nueva matriz resultante. A diferencia de la implementación concurrente, además de crear matrices cuadradas, crea un vector de hilos con este mismo número para realizar las tareas de forma concurrente de manera que los núcleos del computador lo permitan. Para la implementación con la matriz transpuesta, es similar a la implementación serial.
 </p>
-<p>
+<p align="justify">
 Para la implementación con múltiples procesos, se hace uso de memoria compartida por medio de mmap, la cual evita el uso de semáforos.
 </p>
 <p align="justify">
@@ -61,12 +61,40 @@ La multiplicación de matrices de manera secuencial, es una buena solución para
 <p align="justify">
 Al momento de realizar la ejecución del algoritmo concurrente, la máquina donde se realizó la prueba, quedó inoperativa. Esto es debido a que se están utilizando todos los recursos de la máquina, es decir los 4 núcleos que contiene el procesador. Mientras que durante la ejecución del algoritmo secuencial, se podían realizar tareas en segundo plano.
 </p>
-<p>
+<p align="justify">
 Cuando se realizó la multiplicación utilizando múltiples procesos, se nota una pequeña mejora con respecto al tiempo de los hilos, pero no es significativa, ya que al investigar un poco sobre la librería pthread, se encuentra el uso de procesos en bajo nivel. Es decir, al final hilos y procesos tendrán el mismo código en máquina. Esta prueba también bloqueó completamente el procesador.
 </p>
-<p>
+<p align="justify">
 Al momento de realizar la multiplicación teniendo en cuenta la transpuesta de la matriz, se obtuvo una sorpresa con respecto al tiempo, ya que al principio el algoritmo parecía mas lento que el serial, pero a medida que se aumentaron las columnas, se muestra una mejora significativa con respecto al serial. Esto se debe al cache line y la forma en que reducen los tiempos para acceder a memoria.
 </p>
+
+## BenchMark
+
+<p align="center">
+BenchMark
+Prime numbers limit: 20000
+
+Threads started!
+
+CPU speed:
+    events per second:   362.96
+
+General statistics:
+    total time:                          10.0018s
+    total number of events:              3631
+
+Latency (ms):
+         min:                                    2.57
+         avg:                                    2.75
+         max:                                    4.04
+         95th percentile:                        3.36
+         sum:                                 9998.22
+
+Threads fairness:
+    events (avg/stddev):           3631.0000/0.00
+    execution time (avg/stddev):   9.9982/0.00
+</p>
+
 
 ## Contribuciones :busts_in_silhouette:
 
