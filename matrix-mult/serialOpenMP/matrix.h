@@ -77,7 +77,9 @@ class MatrixOperation{
         csv_generator(this->r);
         csv_time(time,this->m2.size());
         this->matrixprint(this->m1);
+        cout<<endl;
         this->matrixprint(this->m2);
+        cout<<endl;
         this->matrixprint(this->r);
 
         return time;
