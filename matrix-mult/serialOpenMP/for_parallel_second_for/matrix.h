@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "../threads/matrix_generator.h"
+#include "../../threads/matrix_generator.h"
 #include "csv_generator.h"
 #include <chrono>
 #include <unistd.h>
@@ -37,13 +37,13 @@ class MatrixOperation{
             long im1 = 0;
             //cout<<endl<<"thread number "<< mi <<endl;
 
-            #pragma omp parallel private(im1, pos)
+            
 
-
+            #pragma omp parallel for
             for (im1 = 0;im1 < m1.size();im1++){
                 int sum = 0;
             
-            #pragma omp parallel for
+           
 
                 for(pos = 0; pos < m1[im1].size();pos++)
                     sum  = sum + m1[im1][pos] * m2[pos][mi];

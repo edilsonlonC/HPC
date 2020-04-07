@@ -39,7 +39,7 @@ class MatrixOperation{
 
             
 
-           #pragma omp loop
+            #pragma omp distribute 
             for (im1 = 0;im1 < m1.size();im1++){
                 int sum = 0;
             
