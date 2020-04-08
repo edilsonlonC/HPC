@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "../../threads/matrix_generator.h"
+#include "z../../threads/matrix_generator.h"
 #include "csv_generator.h"
 #include <chrono>
 #include <unistd.h>
