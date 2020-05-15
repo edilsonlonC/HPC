@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	n = atoi(argv[2]);
 	tol = atof(argv[3]);
 	for (u = 0; u < 5; u++)
-	{ // Iterations for o/p
+	{
 		for (nthreads = 2; nthreads <= 10; nthreads += 2)
 		{ // Loop for thread numbers
 			if (nthreads == 10)
@@ -38,11 +38,11 @@ int main(int argc, char *argv[])
 			tstart = omp_get_wtime(); //Start of timer for parallel
 
 			// initialise temperature array
-#pragma omp parallel default(shared) private(i, j)
+#pragma omp parallel default(shared) private(i, j, diff)
 
-			{ // Start of  parellel region 1
+			{ // Start of  parellel region
 
-#pragma omp for schedule(auto)
+#pragma omp for schedule(static) collapse(2)
 				for (i = 0; i <= m + 1; i++)
 				{
 					for (j = 0; j <= n + 1; j++)
@@ -51,26 +51,24 @@ int main(int argc, char *argv[])
 					}
 				}
 				//#pragma omp barrier
-// fix boundary conditions
-#pragma omp for schedule(auto)
+				// fix boundary conditions
+
+#pragma omp for nowait schedule(static) //nowait si no se necesita sincronizacion despues del loop 
 				for (i = 1; i <= m; i++)
 				{
 					t[i][0] = 10.0;
 					t[i][n + 1] = 140.0;
 				}
 
-#pragma omp for schedule(auto)
+#pragma omp for nowait schedule(static)
 				for (j = 1; j <= n; j++)
 				{
 					t[0][j] = 20.0;
 					t[m + 1][j] = 100.0;
 				}
 
-			} // end parallel region 1
+				// main loop
 
-			// main loop
-#pragma omp parallel default(shared) private(i, j, diff) // start of parallel region 2
-			{
 				iter = 0;
 				difmax = 1000000.0;
 				while (difmax > tol)
@@ -78,7 +76,7 @@ int main(int argc, char *argv[])
 					iter++;
 
 					// update temperature for next iteration
-#pragma omp for schedule(auto)
+#pragma omp for schedule(static) collapse(2) //colapse agrupa varios bucles juntando sus iteraciones
 					for (i = 1; i <= m; i++)
 					{
 						for (j = 1; j <= n; j++)
@@ -91,7 +89,7 @@ int main(int argc, char *argv[])
 
 					// #pragma omp barrier
 
-#pragma omp for schedule(auto)
+#pragma omp for schedule(static) collapse(2) // schedule asigna bloques fijos de tamaño a cada thread 
 					for (i = 1; i <= m; i++)
 					{
 						for (j = 1; j <= n; j++)
@@ -100,7 +98,7 @@ int main(int argc, char *argv[])
 
 							if (diff > difmax)
 							{
-#pragma omp critical
+
 								difmax = diff;
 							}
 							// copy new to old temperatures
@@ -111,17 +109,17 @@ int main(int argc, char *argv[])
 
 				} //End of  while loop
 
-			} // End of parellel region 2
+			} // End of parellel region.
 
 			tstop = (omp_get_wtime() - tstart); //End of timer for parallel
 
-			stop[count] = tstop * 1000000; // Time required for each thread has been stored in array elements.
+			stop[count] = tstop ; // Time required for each thread has been stored in array elements.
 			count++;
 
-			printf("Time: %4.3lf for %d Threads\n", tstop * 1000000, nthreads);
+			printf("Time: %4.3lf for %d Threads\n", tstop , nthreads);
 
 		} // End of thread loops
 		printf("\n");
 
-	} // Iterations for o/p's End
+	}
 }

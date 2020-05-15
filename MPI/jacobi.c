@@ -9,8 +9,8 @@ https://www.mcs.anl.gov/research/projects/mpi/tutorial/mpiexmpl/src/jacobi/C/mai
 */
 
 
-/* Este ejemplo maneja una malla de 12 x 12, solo en 4 procesos. */
-#define maxn 12
+/* Este ejemplo maneja una malla de maxn x maxn, solo en 4 procesos. */
+#define maxn 1300
 
 
 int main( argc, argv )
@@ -27,10 +27,15 @@ char **argv;
     int        i_first, i_last;
     MPI_Status status;
     double     diffnorm, gdiffnorm;
-    double     xlocal[(12/4)+2][12]; // 5*12
-    double     xnew[(12/3)+2][12];   // 6*12
+    double     xlocal[(maxn/4)+2][maxn]; // 5*maxn
+    double     xnew[(maxn/3)+2][maxn];   // 6*maxn
 
     MPI_Init( &argc, &argv );
+
+	// Empezamos a tomar el tiempo 
+	double t1, t2; 
+	t1 = MPI_Wtime();
+
 
 	// Determina el rango (identificador) del proceso que lo llama dentro del comunicador seleccionado.
     MPI_Comm_rank( MPI_COMM_WORLD, &rank );
@@ -152,6 +157,9 @@ char **argv;
 		}
 		
     } while (gdiffnorm > 1.0e-2 && itcnt < 100);
+
+	t2 = MPI_Wtime(); 
+	printf( "Tiempo Transcurrido %f\n", t2 - t1 ); 
 
     MPI_Finalize( );
     return 0;

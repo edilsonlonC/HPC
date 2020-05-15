@@ -3,28 +3,6 @@
   #include <math.h> 
   #include <stdlib.h> 
  
- /* 
-       subroutine jacobi (n,m,dx,dy,alpha,omega,u,f,tol,maxit)
- ******************************************************************
- * Subroutine HelmholtzJ
- * Solves poisson equation on rectangular grid assuming : 
- * (1) Uniform discretization in each direction, and 
- * (2) Dirichlect boundary conditions 
- * 
- * Jacobi method is used in this routine 
- *
- * Input : n,m   Number of grid points in the X/Y directions 
- *         dx,dy Grid spacing in the X/Y directions 
- *         alpha Helmholtz eqn. coefficient 
- *         omega Relaxation factor 
- *         f(n,m) Right hand side function 
- *         u(n,m) Dependent variable/Solution
- *         tol    Tolerance for iterative solver 
- *         maxit  Maximum number of iterations 
- *
- * Output : u(n,m) - Solution 
- *****************************************************************
- */
  void jacobi ( const int n, const int m, double dx, double dy, double alpha, 
  	double omega, double *u, double *f, double tol, int maxit )
  {
